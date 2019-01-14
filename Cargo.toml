@@ -1,0 +1,6 @@
+[package]
+name = "game-of-life-and-death"
+version = "0.1.0"
+authors = ["Jon Poler <jonathan.poler@gmail.com>"]
+
+[dependencies]
