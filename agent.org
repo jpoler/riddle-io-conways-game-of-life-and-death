@@ -1,0 +1,75 @@
+* task environment
+
+** PEAS
+*** performance measure
+
+I have the feeling that performance measure might be one of the hardest parts of
+describing the task environment. It seems as though there are many choices for
+performance measure.
+
+Some potential performance measures that I'll look at are:
+
+1. Inverse number of opponents cells (1/cells). This has a nice property of
+   being between 0 and 1, except for the case of zero cells, which seems good
+   because I don't mind assigning infinite value to a win. However this has the
+   disadvantage that there's no distinction between faster and longer wins.
+
+2. Difference between self and other's cells. This is interesting because
+   technically a rational agent that maximized this function would be less
+   likely to lose (just don't die), but it might not lead to winning outcomes.
+
+3. Structure. Comparison of healthy/unhealthy cell patterns between boards. This
+   one could be used in both defensive and offensive ways. For instance, seeing
+   that self has accrued a lot of stable cell patterns might be good (or bad if
+   it can be gamed to self's disadvantage). On the other hand, actively bringing
+   about unhealthy/gameable cell patterns in the opponent's camp would be an
+   offensive-minded way to use structural analysis.
+
+4. Maniacal aggression. Only assign value to killing the opponent, since this
+   game is zero-sum.
+
+5. Some linear/non-linear combination of compatible performance measures from
+   above.
+
+While the high level goal is to maximize chances of winning, subgoals may
+require use of some of the above metrics.
+
+
+*** environment
+The properties of the environment are as follows:
+
+Fully observable: The entire board state is known to both players
+                  An interesting question is whether the fact that an agent's
+                  internal state is not observable makes the state partially
+                  observable, but I'm not going to overthink this
+
+Multiagent:       Two players (competetive, not cooperative)
+
+Deterministic:    The board updates based on a fixed set of rules, and by player
+                  actions. Once again, a random player could lead to random
+                  actions, but I don't think that this is in the spirit of the
+                  categorization. 
+
+Sequential:       The state of future environments is dependent upon the actions
+                  taken by the agent now. Therefore future agent decisions are
+                  affected by current decisions.
+
+Discrete:         The board state is made up of discrete cells, each with a
+                  discrete binary state (dead or alive).
+
+Known:            We know the rules of the game beforehand.
+
+*** actuators
+Actuators in this context are writing a move to stdout.
+
+Possible actions are kill, birth, and pass.
+*** sensors
+Sensors are reading from stdin.
+
+Possible percepts are shown in the api: [[https://docs.riddles.io/game-of-life-and-death/api][api]]
+
+They include game settings such as board size, time per move, time bank, player
+names and ids, etc.
+
+They also include the round number, current board state, number of cells per
+player, and the most recent action by an opponent
