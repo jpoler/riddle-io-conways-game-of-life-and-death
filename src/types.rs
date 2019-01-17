@@ -31,7 +31,7 @@ pub enum Setting {
     MaxRounds(u64),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum Square {
     Empty,
     Player1,
